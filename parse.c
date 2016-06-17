@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jomeirin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/06/17 13:24:36 by jomeirin          #+#    #+#             */
+/*   Updated: 2016/06/17 13:24:43 by jomeirin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 t_list	*ft_lstnew(void const *content, size_t size)
@@ -108,13 +120,13 @@ void	init_flags(t_flags *flags)
 //}
 void	parse(int argc, char **argv, t_reader *reader)
 {
-	char	dot;
+	char	*dot;
 	t_flags	flags;
 
-	dot = '.';
+	dot = ".\0";
 	init_flags(&flags);
 	if (argc == 1)
-		just_display_alphabetically(&dot, reader);
+		just_display_alphabetically(dot, reader);
 	else if (argc == 2 && argv[1][0] != '-')
 			just_display_alphabetically(argv[1], reader);
 	else
@@ -123,14 +135,19 @@ void	parse(int argc, char **argv, t_reader *reader)
 		// flags, parse them and collect data relevant to each.
 		if (argv[1][0] == '-')
 		{
-			if (init(argv[argc-1], reader) == -1)
+			if (argv[argc - 1][0] == '-')				
+			{
+				find_flags(argc, argv, &flags);
+				if (init(".\0", reader) == -1)
+					return ;
+			}
+			else if (init(argv[argc - 1], reader) == -1)
 				return ;
 			else 
 			{
 				find_flags(argc, argv, &flags);
-				//while ((reader->open.read = readdir(reader->open.dirp)))
-			//if (reader->open.read->d_name[0] != '.')
-				//add_to_record(reader);
+				if (init(argv[argc - 1], reader) == -1)
+					return ;
 			}
 			//display_flags(flags, reader);
 		}
