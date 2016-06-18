@@ -82,7 +82,8 @@ void	just_display(char *fname, t_reader *reader)
 				add_to_record(reader);
 		if (reader->flags.reverse == 'r')
 			alpha_sort(reader, &z_to_a);
-		else alpha_sort(reader, &a_to_z);
+		else
+			alpha_sort(reader, &a_to_z);
 		display(reader);
 	}
 }
@@ -95,15 +96,30 @@ void	find_flags(int argc, char **argv, t_flags *flags)
 	while (argv[i] && i < argc)
 	{
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'R')
-		{	flags->recursive = 'R';	i++;	}
+		{
+			flags->recursive = 'R';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'l')
-		{	flags->long_list = 'l';	i++;	}
+		{
+			flags->long_list = 'l';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'r')
-		{	flags->reverse = 'r';	i++;	}
+		{
+			flags->reverse = 'r';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 't')
-		{	flags->time = 't';		i++;	}
+		{
+			flags->time = 't';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'a')
-		{	flags->all = 'a';		i++;	}
+		{
+			flags->all = 'a';
+			i++;
+		}
 		i++;
 	}
 }
@@ -122,10 +138,11 @@ void	init_flags(t_flags *flags)
 //}
 //void	reursive_print(t_flags flags, t_reader reader)
 
-void	apply_flags(t_reader reader)
+void	apply_flags(t_reader reader, char *dot, int depth)
 {
-	if (reader.flags.recursive == 'R')
-		printf("recursive");//recursive_print(reader);
+	if (reader.flags.recursive)
+		recursive_list(dot, depth, &reader);
+		//printf("recursive");//recursive_print(reader);
 }
 
 void	parse(int argc, char **argv, t_reader *reader)
@@ -154,14 +171,14 @@ void	parse(int argc, char **argv, t_reader *reader)
 			}
 			else if (init(argv[argc - 1], reader) == -1)
 				return ;
-			else 
+			else
 				find_flags(argc, argv, &(reader->flags));
-			apply_flags(*reader);
+			apply_flags(*reader, dot, depth);
 			//display_flags(flags, reader);
 		}
-		recursive_list(dot, depth, reader);  
-		printf("%c:\n", reader->flags.recursive);
-		printf("%c:\n", reader->flags.reverse);
-		printf("Fucks\n");
+		//printf("%c:\n", reader->flags.recursive);
+		//printf("%c:\n", reader->flags.reverse);
+		//printf("Fucks\n");
 	}
+	closedir(reader->open.dirp);
 }
