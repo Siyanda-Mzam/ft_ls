@@ -99,15 +99,30 @@ void	find_flags(int argc, char **argv, t_flags *flags)
 	while (argv[i] && i < argc)
 	{
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'R')
-		{	flags->recursive = 'R';	i++;	}
+		{
+			flags->recursive = 'R';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'l')
-		{	flags->long_list = 'l';	i++;	}
+		{
+			flags->long_list = 'l';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'r')
-		{	flags->reverse = 'r';	i++;	}
+		{
+			flags->reverse = 'r';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 't')
-		{	flags->time = 't';		i++;	}
+		{
+			flags->time = 't';
+			i++;
+		}
 		if (argv[i] && argv[i][0] == '-' && argv[i][1] == 'a')
-		{	flags->all = 'a';		i++;	}
+		{
+			flags->all = 'a';
+			i++;
+		}
 		i++;
 	}
 }
@@ -177,4 +192,5 @@ void	parse(int argc, char **argv, t_reader *reader)
 		printf("%c:\n", reader->flags.reverse);
 		printf("Fucks\n");
 	}
+	closedir(reader->open.dirp);
 }

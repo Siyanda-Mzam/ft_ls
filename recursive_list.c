@@ -40,15 +40,6 @@ void	recursive_list(char *fname, int depth, t_reader *reader)
 			path = ft_strjoin(fname, reader->open.read->d_name);
 			path_len = ft_strlen(path);
 			path[path_len] = 0;
-			if (!(ft_strcmp(reader->open.read->d_name, ".") == 0 ||
-					ft_strcmp(reader->open.read->d_name, "..") == 0))
-				printf("%*s[%s]\n", depth * 2, "", reader->open.read->d_name);
-				recursive_list(path, depth + 1, reader);
-		}
-		else
-		{
-			printf("%*s- %s\n", depth * 2, "", reader->open.read->d_name);
-		}
 	}*/
 	closedir(nreader->open.dirp);
 }
