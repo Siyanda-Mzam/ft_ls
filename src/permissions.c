@@ -1,10 +1,12 @@
+#include "../includes/ft_ls.h"
+
 static char *lsperms(int mode)
 {
     static const char **rwx;
     static char bits[11];
 
 	rwx = {"---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx"};
-    bits[0] = filetypeletter(mode);
+    bits[0] = file_type_letter(mode);
     strcpy(&bits[1], rwx[(mode >> 6)& 7]);
     strcpy(&bits[4], rwx[(mode >> 3)& 7]);
     strcpy(&bits[7], rwx[(mode & 7)]);
@@ -31,7 +33,7 @@ static char *lsperms(int mode)
 	return(bits);
 }
 
-static int filetypeletter(int mode)
+static int file_type_letter(int mode)
 {
     char    c;
 

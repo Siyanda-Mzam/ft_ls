@@ -39,15 +39,14 @@ typedef struct		s_dir_files_opener
 {
 	DIR				*dirp;
 	struct dirent	*read;
-	struct stat		*buf;
 }					t_opener;
 
 typedef struct		s_dir_files_reader
 {
 	t_opener		open;
 	t_list			*store;
-	t_list			*stat_store;
 	t_flags			flags;
+	struct stat		*buf;
 }					t_reader;
 
 void				parse(int argc, char **argv, t_reader *reader);
@@ -61,5 +60,4 @@ void				find_flags(int argc, char **argv, t_flags *flags);
 void				apply_flags(char *fname, t_reader *reader);
 void				display(t_reader *reader);
 void				recursive_list(char *fname, int depth, t_reader *reader);
-
 #endif

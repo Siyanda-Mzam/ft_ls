@@ -60,11 +60,12 @@ void	display(t_reader *reader)
 {
 	t_list *runner;
 
-	runner = reader->store->next;
+	runner = reader->store;
 	//size_lstiter(runner);
 	while (runner)
 	{
 		printf("%s\t", (char *)((struct dirent *)runner->content)->d_name);
+	//	printf("%s\t", ctime(&reader->buf->st_ctime));
 		runner = runner->next;
 	}
 	printf("\n");
