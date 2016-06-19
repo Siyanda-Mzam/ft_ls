@@ -10,7 +10,7 @@ void	recursive_list(char *fname, int depth, t_reader *reader)
 
 	//path_len = 0;
 	nreader = (t_reader *)malloc(sizeof(nreader));
-	printf("\n%s:\n", fname);
+	printf("\n%*s:\n", 10, fname);
 	just_display(fname, reader);
 	runner = reader->store->next;
 	while (runner)
@@ -41,5 +41,4 @@ void	recursive_list(char *fname, int depth, t_reader *reader)
 			path_len = ft_strlen(path);
 			path[path_len] = 0;
 	}*/
-	closedir(nreader->open.dirp);
 }

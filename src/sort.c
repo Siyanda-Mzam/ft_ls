@@ -20,7 +20,7 @@ void	to_lower(unsigned char *str)
 	while (*(str + i))
 	{
 		if (*(str + i) >= 65 && *(str + i) <= 90)
-		*(str + i) = *(str + i) + 32;
+			*(str + i) = *(str + i) + 32;
 		i++;
 	}
 }
@@ -36,7 +36,7 @@ int		ft_strcmp(const char *s1, const char *s2)
 	to_lower(str1);
 	to_lower(str2);
 	i = 0;
-	while (str1[i] != '\0' || str2[i] != '\0')
+	while (str1[i] != '\0' || str2[i] != '\0') //If one string ends, this might segfault.
 	{
 		if (str1[i] != str2[i])
 			return (str1[i] - str2[i]);
@@ -46,6 +46,7 @@ int		ft_strcmp(const char *s1, const char *s2)
 	free(str2);
 	return (0);
 }
+
 int		z_to_a(char *s1, char *s2)
 {
 	return (ft_strcmp(s1, s2) < 0);
